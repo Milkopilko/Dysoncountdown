@@ -7,17 +7,25 @@
             }
         </style>
     </head>
-    <body>
+    <body style="margin: 0px;">
         <div style=  "display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;">
-            <h1 style="text-align: center; font-family:jokerman; color:rgb(255, 191, 53)">{{ countdown }}</h1>
+            <h1 id="1" style="text-align: center; font-family:jokerman; color:rgb(255, 191, 53)">{{ countdown }}</h1>
         </div>
     </body>
 </html>
 <script>
-    setTimeout(function(){
-   window.location.reload(1);
+    setInterval(function(){
+    fetch(`${window.origin}/getcountdown`, {
+        method: "POST",
+        cache: "no-cache",
+    })
+    .then(function (response){
+        response.json().then(function (data) {
+            var a = document.getElementById("1");
+            a.innerText = data.message})
+    })
 }, 1000);
 </script>
