@@ -1,31 +1,60 @@
 <html>
     <head>
         <title>Dyson Sphere Program update countdown</title>
-        <style>
-            div {
-              background-image: url('/static/images/spaghett.jpg');
-            }
-        </style>
     </head>
     <body style="margin: 0px;">
-        <div style=  "display: flex;
+        <div id="divboi" style=  "display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;">
+        height: 100%;
+        flex-direction: column;
+        background-image: url('/static/images/spaghett.jpg');"
+        >
             <h1 id="1" style="text-align: center; font-family:jokerman; color:rgb(255, 191, 53)">{{ countdown }}</h1>
+            <h2 id="2" style="text-align: center; font-family:jokerman; color:rgb(255, 191, 53)">are you excited?</h2>
+            <div style=  "display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row">
+                <button id="yes-button" onclick="myFunction(true)" style ="margin: 10px">
+                    Yes
+                </button>
+                <button id="no-button"onclick="myFunction(false)" style ="margin: 10px">
+                    No
+                </button>
+            </div>
+            <h2 id="yes-spaget" style=" text-align: center; font-family:jokerman; color:rgba(0, 35, 190, 0)">you have a sufficient amount of spaghetti in your diet</h2>
+            <h2 id="no-spaget" style=" text-align: center; font-family:jokerman; color:rgba(0, 35, 190, 0)">you have an insufficient amount of spaghetti in your diet</h2>
         </div>
     </body>
 </html>
 <script>
     setInterval(function(){
-    fetch(`${window.origin}/getcountdown`, {
-        method: "POST",
-        cache: "no-cache",
-    })
-    .then(function (response){
-        response.json().then(function (data) {
-            var a = document.getElementById("1");
-            a.innerText = data.message})
-    })
-}, 1000);
+        fetch(`${window.origin}/getcountdown`, {
+            method: "POST",
+            cache: "no-cache",
+        })
+        .then(function (response){
+            response.json().then(function (data) {
+                var a = document.getElementById("1");
+                a.innerText = data.message})
+        })
+    }, 1000);
+
+    function myFunction(boool) {
+        var b = document.getElementById("yes-button")
+        var c = document.getElementById("no-button")
+        var d = document.getElementById("yes-spaget")
+        var e = document.getElementById("no-spaget")
+        var f = document.getElementById("1")
+        var g = document.getElementById("2")
+        var h = document.getElementById("divboi")
+        b.setAttribute("style", "margin: 10px; display:none")
+        c.setAttribute("style", "margin: 10px; display:none")
+        f.setAttribute("style", "display:none")
+        g.setAttribute("style", "display:none")
+        h.setAttribute("style", "display: flex;justify-content: center;align-items: center;height: 100%;flex-direction: column; background-image: url('/static/images/dysonspheregameplay.webp');")
+        if(boool){d.setAttribute("style", " text-align: center; font-family:jokerman; color:rgb(0, 35, 190); background-color: white;")}
+        else{e.setAttribute("style", " text-align: center; font-family:jokerman; color:rgb(0, 35, 190); background-color: white;")}
+    }
 </script>
