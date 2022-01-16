@@ -3,6 +3,7 @@ from flask import render_template
 import dysontime
 
 app = Flask(__name__)
+app.secret_key = "asdfgshvgdg"
 
 @app.route('/', methods=["GET"])
 def homepage():
